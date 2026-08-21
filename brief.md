@@ -4,7 +4,7 @@
 
 - 任务名称：
 - 任务类型：新内容 / 旧文优化 / 竞品分析 / 质量回审
-- 内容类型：How-to / 其他（其他类型须先提供对应 Type Module）
+- 内容类型：How-to / Top 评测 / VS / 泛主题 / Alternatives / What Is & Specs
 - 目标市场与语言：
 - 目标页面或站内 URL：
 - 截止时间：
@@ -24,7 +24,7 @@
 - 可使用的案例、测试、图片和来源：
 - 关键词状态：formal_list / provisional / later_list
 - 关键词覆盖模式：intent-led（默认）/ strict_coverage（仅明确要求时）
-- Product Catalog（名称、URL、支持对象、核心能力、限制、官方来源、CTA）：
+- Product Catalog（名称、URL、支持对象、核心能力、限制、官方来源、核验状态与日期、CTA）：
 
 ## 交付要求
 
@@ -33,4 +33,5 @@
 - 审核人或发布要求：
 - 必须遵循的额外规范：
 - 图片与视觉要求：
+- 类型专属输入（Top 的候选池/VS 的比较对象/Alternatives 的原对象/What Is 的术语或规格/泛主题的实体范围）：
 
