@@ -1,11 +1,11 @@
 # Codex Workflows
 
-这是一个用于跨电脑继续 Codex 工作的私有工作区。
+这是一个用于跨电脑继续 Codex 工作的私有工作区。当前现行标准为 How-to 文章内容生成工作流 v5；文章回审作为独立下游流程处理最终优化与发布交付。
 
 ## 使用方法
 
 1. 在 `brief.md` 写清楚当前任务和输出要求。
-2. 让 Codex 读取 `AGENTS.md`、`brief.md` 和 `STATUS.md` 后开始工作。
+2. 让 Codex 读取 `AGENTS.md`、`brief.md` 和 `STATUS.md` 后开始工作；新建 How-to 还必须遵守 `standards/07-How-to文章内容生成工作流_v5.md`。
 3. 将最终成果保存到 `outputs/`。
 4. 更新 `STATUS.md`，然后提交并同步到 GitHub。
 
