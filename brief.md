@@ -50,6 +50,8 @@
 - 关键词状态：formal_list / provisional / later_list
 - 关键词覆盖模式：intent-led（默认）/ strict_coverage（仅明确要求时）
 - Product Catalog（名称、URL、支持对象、核心能力、限制、官方来源、核验状态与日期、CTA）：
+- 产品露出约束：`recommended`（默认）/ `mandatory_product_inclusion`（仅用户明确要求产品必须作为主方法或必须进入正文时）；
+- 产品相邻性判定：`formal_fit` / `adjacent_fit` / `research_incomplete` / `scoped_exclusion` / `blocked_waiting_for_user`；证据与边界记录路径：
 
 ## 交付要求
 

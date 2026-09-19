@@ -79,7 +79,7 @@ products:
     available_evidence: official documentation plus internal product whitepaper
     verification_status: partially_verified
     verified_at: 2026-08-25
-    article_role_candidates: [formal_method, ultra_tip]
+    article_role_candidates: [formal_method, ultra_tip, related_supplement]
     cta_url: https://www.hitpaw.com/fotorpea-photo-enhancer.html
 ```
 

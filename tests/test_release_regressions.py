@@ -9,9 +9,9 @@ from validate_article_package import validate, REQUIRED_FILES, narrative_count
 def package_fixture(run,article_type='vs'):
     for name in REQUIRED_FILES:
         if name not in {'workflow-state.json','release-manifest.json'}: (run/name).write_text('Synthetic fixture evidence, not a production article.')
-    markdown='SEO title: Topic guide\n\nMeta description: Understand this topic clearly.\n\nSlug: topic-guide\n\n# Topic\n\nComplete article text.\n\n## Decision\n\nChoose a suitable option.'
+    markdown='SEO title: Topic guide\n\nMeta description: Understand this topic clearly.\n\nSlug: topic-guide\n\n# Topic\n\nComplete article text.\n\n## Decision\n\nChoose a suitable option.\n\n[Source](https://example.com)'
     (run/'06_完整文章.md').write_text(markdown)
-    docx(run/'06_完整文章.docx',[(0,'SEO title: Topic guide'),(0,'Meta description: Understand this topic clearly.'),(0,'Slug: topic-guide'),(1,'Topic'),(0,'Complete article text.'),(2,'Decision'),(0,'Choose a suitable option.')])
+    docx(run/'06_完整文章.docx',[(0,'SEO title: Topic guide'),(0,'Meta description: Understand this topic clearly.'),(0,'Slug: topic-guide'),(1,'Topic'),(0,'Complete article text.'),(2,'Decision'),(0,'Choose a suitable option.')],[('Source','https://example.com')])
     (run/'05_文章结构与关键词映射.md').write_text('| Keyword | Location | Status |\n| Topic | H1 | Covered |')
     (run/'13_内容资产保留审计.md').write_text('Review mode: new_article')
     (run/'03_SERP与竞品分析.md').write_text('| Natural rank | Title | URL | Page type |\n|---|---|---|---|\n'+'\n'.join(f'| {i} | Result {i} | https://example{i}.com | Article |' for i in range(1,11)))
@@ -45,6 +45,26 @@ class ReleaseTests(unittest.TestCase):
         p=self.run/'qa-render.json';cfg=json.loads(p.read_text());cfg['source_docx_sha256']='0'*64;save(p,cfg);self.assertFalse(validate(self.run)['publication_ready'])
     def test_excluded_product_requires_realtime_verification(self):
         p=self.run/'release-manifest.json';cfg=json.loads(p.read_text(encoding='utf-8'));cfg['product']={'recommended':'Example','role':'excluded','resolution':'user_confirmed','authorization_reference':'user message','official_source':'https://example.com','verified_date':'2026-09-07'};save(p,cfg);self.assertFalse(validate(self.run)['publication_ready'])
+    def test_scoped_exclusion_does_not_require_confirmation_when_not_mandatory(self):
+        p=self.run/'release-manifest.json';cfg=json.loads(p.read_text(encoding='utf-8'))
+        cfg['product']={'recommended':'Example','role':'excluded','resolution':'scoped_exclusion','mandatory_product_inclusion':False,
+                        'official_source':'https://example.com','verified_date':'2026-09-07',
+                        'real_time_official_verification':{'checked_at':'2026-09-07','product_page':'https://example.com/product','official_guide':'https://example.com/help','object_or_format_evidence':'Official evidence shows the primary object is unsupported.','catalog_conflict_resolution':'Current official evidence used.'}}
+        save(p,cfg);self.assertTrue(validate(self.run)['publication_ready'],validate(self.run))
+    def test_related_supplement_requires_structured_adjacency_assessment(self):
+        p=self.run/'release-manifest.json';cfg=json.loads(p.read_text(encoding='utf-8'))
+        cfg['product']={'recommended':'Example','role':'related_supplement','resolution':'adjacent_fit','mandatory_product_inclusion':False,'official_source':'https://example.com','verified_date':'2026-09-07'}
+        save(p,cfg);self.assertFalse(validate(self.run)['publication_ready'])
+    def test_related_supplement_with_verified_boundary_is_allowed(self):
+        p=self.run/'release-manifest.json';cfg=json.loads(p.read_text(encoding='utf-8'))
+        cfg['product']={'recommended':'Example','role':'related_supplement','resolution':'adjacent_fit','mandatory_product_inclusion':False,'official_source':'https://example.com','verified_date':'2026-09-07',
+                        'adjacency_assessment':{'result':'adjacent_fit','reader_follow_on_need':'Reader needs a separate owned cover image after the core task.','relationship_to_primary_task':'Same creator publication workflow.','verified_supported_object':'Official page confirms single image support.','evidence_path':'09_事实与来源核验表.md','primary_task_boundary':'Does not complete the primary video task.','placement':'after_core_answer','module_heading':'Decision','non_substitution_disclosure':'Complete article text.'}}
+        save(p,cfg);self.assertTrue(validate(self.run)['publication_ready'],validate(self.run))
+    def test_related_supplement_disclosure_must_be_in_final_article(self):
+        p=self.run/'release-manifest.json';cfg=json.loads(p.read_text(encoding='utf-8'))
+        cfg['product']={'recommended':'Example','role':'related_supplement','resolution':'adjacent_fit','mandatory_product_inclusion':False,'official_source':'https://example.com','verified_date':'2026-09-07',
+                        'adjacency_assessment':{'result':'adjacent_fit','reader_follow_on_need':'Reader needs a separate owned cover image after the core task.','relationship_to_primary_task':'Same creator publication workflow.','verified_supported_object':'Official page confirms single image support.','evidence_path':'09_事实与来源核验表.md','primary_task_boundary':'Does not complete the primary video task.','placement':'after_core_answer','module_heading':'Decision','non_substitution_disclosure':'This statement is absent from the final article.'}}
+        save(p,cfg);self.assertFalse(validate(self.run)['publication_ready'])
     def test_all_article_types_use_their_contract(self):
         for kind in ['how_to','top_evaluation','vs','general_topic','alternatives','what_is_specs']:
             with tempfile.TemporaryDirectory() as tmp:

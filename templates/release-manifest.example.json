@@ -1,5 +1,5 @@
 {
-  "workflow_version": "3.1.0",
+  "workflow_version": "3.1.2",
   "run_id": "TASK-001",
   "article_type": "how_to",
   "mode": "new_article",
@@ -27,8 +27,20 @@
     "recommended": "none",
     "role": "",
     "resolution": "not_needed",
+    "mandatory_product_inclusion": false,
     "official_source": "",
-    "verified_date": ""
+    "verified_date": "",
+    "adjacency_assessment": {
+      "result": "not_applicable",
+      "reader_follow_on_need": "",
+      "relationship_to_primary_task": "",
+      "verified_supported_object": "",
+      "evidence_path": "",
+      "primary_task_boundary": "",
+      "placement": "",
+      "module_heading": "",
+      "non_substitution_disclosure": ""
+    }
   },
   "required_visual_sections": [],
   "visuals": [],

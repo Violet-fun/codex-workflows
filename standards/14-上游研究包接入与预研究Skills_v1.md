@@ -8,7 +8,7 @@
 
 - 它是 `prefill_only — verify_and_refresh`，不是可直接复制进正文的结论。
 - `Task Router` 仍决定唯一文章类型；`Research Passport & SERP Analyst` 仍完成当前 SERP 与竞品证据；`Fact & Product Verifier` 仍决定事实与产品可用性。
-- 推荐产品是任务变量，不是 Skill。没有匹配的可验证能力、限制或来源时，产品角色只能在完成实时官方证据复核后判为 `excluded`；上游材料、Catalog 或历史白皮书不能单独作为排除依据。
+- 推荐产品是任务变量，不是 Skill。没有匹配的可验证能力、限制或来源时，先完成实时官方证据复核和 `16` 的相邻性判定，再判为 `ultra_tip`、`related_supplement` 或 `scoped_exclusion`；上游材料、Catalog 或历史白皮书不能单独作为排除依据。
 - `agent-reach` 是独立外部研究层，只能在用户明确要求调用 Agent-Reach 时使用；它不会自动安装依赖、读取 Cookie、登录平台或触发其他工作流。
 
 ## 2. 三种接入模式
@@ -60,9 +60,9 @@ return_to: Task Router, Keyword & Intent Planner, Research Passport & SERP Analy
 | SERP 内容策略简报 | 市场、语言、检索日期、URL 和页面类型可追溯 | 日期过旧、来源不明、SERP 已变化、非目标市场 |
 | Article Outline | 有明确读者路径，且与当前候选意图一致 | 与当前 SERP/类型冲突、重复拼接、无内容缺口依据 |
 | 关键词表 | 保留来源、日期、意图和覆盖状态 | 无意图、跨主题、重复、词义不自然或未经市场验证 |
-| 推荐产品 | 有正式 Product Catalog、官方能力与限制证据 | 无法核验、能力不相邻、角色与文章类型不匹配 |
+| 推荐产品 | 有正式 Product Catalog、官方能力与限制证据；按 `16` 的五项相邻性判定有可复用结论 | 无法核验、能力不相邻、角色与文章类型不匹配；此时预填为 `research_incomplete` 或 `scoped_exclusion`，不自动阻断主流程 |
 
-发生冲突时，记录冲突并优先采用当前可验证证据；若冲突会导致 `excluded`，先检索当前官方产品页、官方指南/帮助中心和对象/格式专页，记录日期与直接证据。只有实时官方证据仍确认不匹配时，产品冲突才遵守 `AGENTS.md` 的停止与确认规则。
+发生冲突时，记录冲突并优先采用当前可验证证据；若冲突可能导致 `excluded`，先检索当前官方产品页、官方指南/帮助中心和对象/格式专页，记录日期与直接证据，再执行 `16` 的相邻性判定。实时证据仍确认不匹配时，默认是 `scoped_exclusion` 并继续原流程；只有用户强制产品以不被证据支持的方式出现时，才遵守 `AGENTS.md` 的产品露出暂停规则。
 
 ## 6. 打包 Skills 与调用方式
 

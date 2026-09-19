@@ -10,7 +10,7 @@
 
 - 明确用户任务、素材/设备条件、结果预期、风险和能力差异。
 - 基于当前研究建立候选方案池；Method 数量由场景覆盖决定，不设固定模板。
-- 产品只有直接处理核心任务时才可为 `formal_method`；只解决相邻需求时为 `ultra_tip`，无关或证据不足则 `excluded`。
+- 产品只有直接处理核心任务时才可为 `formal_method`；短小、可操作的相邻需求为 `ultra_tip`；有独立后续决策价值的相关模块为 `related_supplement`；无关或证据不足则 `excluded`。所有判定执行 `16` 的五项相邻性检查。
 - “Best”或“Most Reliable”等定位必须有可追溯比较依据；没有证据时使用场景化、条件性的建议。
 
 ## 3. 推荐答案路径
@@ -40,6 +40,10 @@
 ## 5. Ultra-Tip 边界
 
 Ultra-Tip 只能在正式主任务路径完成之后出现，必须标明其补充性质、相邻场景、产品不解决的主任务部分、步骤与格式/登录/隐私/版权/版本限制。它不计入 Method 数量、不出现在 Quick Answer 或 Methods Overview，也不能代替任何主方案。
+
+### Related Supplement 边界
+
+当相邻需求需要独立解释、不是简短 Tip，或文章类型不适用 Ultra Tip 时，使用 `Related Supplement`。它必须位于 Quick Answer 和主任务选择/方法之后，使用读者可理解的过渡（例如“处理完主素材后，如你还需要处理…”），写明同一工作流关系、已核验对象、最小步骤、限制与主任务不适用范围。不得成为主方法、方法计数、Quick Answer、Methods Overview、结论 CTA 或伪装的产品广告。
 
 ## 6. 结构阻断条件
 

@@ -8,7 +8,7 @@
 | `Task Router` | 主题、主关键词、用户问题、SERP 线索 | 唯一 article type、路由证据卡、边界 | 用产品、次级词或商业目标替代主查询意图 |
 | `Keyword & Intent Planner` | 关键词表/主题、市场、语言 | Keyword Map、覆盖状态、主/次意图、排除词 | 关键词没有真实意图或被硬塞 |
 | `Research Passport & SERP Analyst` | 单主题、检索环境 | SERP 前 10、3–5 个正文样本、来源、机会矩阵 | 没有本主题的正文证据 |
-| `Fact & Product Verifier` | Product Catalog、官方资料、测试/案例 | 可用事实、限制、证据等级、待确认项、产品角色候选、实时官方证据复核记录 | 将未核验信息写成事实，或只凭 Catalog/历史资料将产品排除 |
+| `Fact & Product Verifier` | Product Catalog、官方资料、测试/案例 | 可用事实、限制、证据等级、待确认项、产品角色候选、实时官方证据复核和五项相邻性记录 | 将未核验信息写成事实，或只凭 Catalog/历史资料将产品排除 |
 | `Content Opportunity Planner` | 意图、研究、Type Module | Brief、模块目标、内容差异化、证据回链 | Brief 不能回溯到研究 |
 | `Reference Pattern Analyst`（可选） | 已完成的当前 SERP/竞品研究、外部案例库 | 抽象可用模式、显式排除项、差异化决策与反同质化审计 | 案例预设类型/结构/产品，或复制案例内容 |
 | `Visual Requirements Planner` | 大纲、用户场景、素材 | 图片位置、目的、画面、避免元素、Alt | 只有通用或文字化配图 |

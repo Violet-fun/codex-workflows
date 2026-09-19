@@ -90,11 +90,12 @@
 | --- | --- | --- |
 | `formal_method` | 直接处理当前内容对象并完成核心任务 | 正式 Methods，计入方法数并参与比较 |
 | `ultra_tip` | 仅解决主任务完成后的真实相邻需求 | 主 Methods 后的明确补充模块，不计入方法数 |
+| `related_supplement` | 有独立读者价值的相邻后续对象、素材或发布决策 | 主方法/How to Choose 后的 Related Supplement，不计入方法数 |
 | `excluded` | 不相关、事实不足、能力不匹配或有误导风险 | 不进入正文，记录排除理由 |
 
-产品从不默认进入文章，更不默认排在固定位置。若产品为 `formal_method`，必须与其他方案使用相同证据标准；若为 `ultra_tip`，必须明确说明它**不能**完成主任务的哪一部分。
+产品从不默认进入文章，更不默认排在固定位置。若产品为 `formal_method`，必须与其他方案使用相同证据标准；若为 `ultra_tip` 或 `related_supplement`，必须明确说明它**不能**完成主任务的哪一部分，并通过 `16` 的五项相邻性判定。
 
-若用户明确指定推荐产品，而研究判定其为 `excluded` 或没有真实相邻需求，立即停止。将冲突、可选处理方式和 `Product-resolution status: blocked_waiting_for_user` 写进 Brief，等待用户确认；不得自行把“产品排除”当作已满足商业交付目标。
+若用户指定推荐产品而其不能完成主任务，先完成实时官方复核和 `16` 的五项相邻性判定，而不是立即停止。相邻性通过时使用 `ultra_tip` 或 `related_supplement`；不通过时记录 `Product-resolution status: scoped_exclusion`，产品不进正文但主文章继续。只有用户明确要求该产品必须作为主方法或必须出现在正文，且实时证据否定该要求时，才记录 `Product-resolution status: blocked_waiting_for_user` 并等待产品露出指示。
 
 所有从 SERP、关键词或用户资料中出现且可能改变读者决策的方案类别，都要进入方案池并逐项标明 Included/Excluded；即使不建议下载器、AI、录屏或第三方工具，也必须记录其风险、适用边界、证据和排除理由。
 

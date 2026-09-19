@@ -82,6 +82,10 @@ WatermarkGemini 是否进入文章，必须先根据文章实际任务判断。
 
 Ultra Tip 不计入正式 Methods 数量。
 
+### related_supplement
+
+当图片处理是同一创作/发布流程中的独立后续步骤，例如主任务完成后处理一张自有封面、Photo Mode 静图或配图，且当前官网支持该图片对象时，可使用 `Related Supplement`。必须先完成 `16` 的五项相邻性判定，写明产品仅处理单张图片、不能处理主任务中的视频/动图/PDF或移动帧，并放在主答案之后。
+
 ---
 
 ### excluded
@@ -114,8 +118,9 @@ Ultra Tip 不计入正式 Methods 数量。
 3. 判断 WatermarkGemini 当前能力是否直接解决该问题。
 4. 判断产品角色：
    - 直接解决 → formal_method
-   - 仅作为相关补充 → ultra_tip
-   - 无法解决 → excluded
+   - 短小、可操作的相关补充 → ultra_tip
+   - 有独立后续决策价值的相关模块 → related_supplement
+   - 无法解决且没有可证实相邻需求 → scoped_exclusion
 5. 确认角色后，再读取对应产品资料。
 6. 所有产品功能、参数和限制必须来源于产品知识库，不得自行推断。
 

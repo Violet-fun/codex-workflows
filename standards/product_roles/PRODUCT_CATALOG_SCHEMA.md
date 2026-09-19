@@ -26,7 +26,7 @@ products:
     verification_status: verified | partially_verified | pending
     verified_at: 2026-08-21
     article_role_candidates:
-      - formal_method | ranked_candidate | comparison_subject | implementation_tool | ultra_tip
+      - formal_method | ranked_candidate | comparison_subject | implementation_tool | ultra_tip | related_supplement
     cta_url: https://example.com/
 ```
 
@@ -36,7 +36,7 @@ products:
 2. 产品角色由当前主题的内容对象、核心任务、文章类型与证据决定；可用角色见 `08-多类型文章调度与共享标准_v1.md`。
 3. 产品名称、功能、限制、链接和 CTA 必须来自本次 Catalog；不得从前一篇文章复制。
 4. How-to 的 `formal_method` 必须直接完成当前主任务，进入方法矩阵和比较表；Top/Alternatives 的 `ranked_candidate`、VS 的 `comparison_subject` 也必须按同一事实标准核验。
-5. `ultra_tip` 只能解决主任务完成后的相邻需求，必须披露不适用范围，且不计入方法、榜单或对比结论。
+5. `ultra_tip` 只能解决主任务完成后的短小相邻需求，必须披露不适用范围，且不计入方法、榜单或对比结论。需要独立后续决策说明的相邻模块使用 `related_supplement`；两者均执行 `16-产品相邻性与阻断分流_v1.md`。
 6. 多个产品可同时进入候选池；不要求每篇文章使用产品，也不允许为推广而制造场景。
 7. `verification_status` 不是宣传词：`pending` 或 `partially_verified` 的能力、价格、性能和案例不得被写成确定结论。
 8. Catalog 是可更新的事实入口，不是高于当前官方资料的裁决。若实时官方资料显示 Catalog 的对象、格式、输入、输出或模块边界过时，更新 Catalog 并以实时资料暂时作为文章核验依据；不得据旧边界否定已证实能力。

@@ -22,6 +22,10 @@
 
 当文章主任务已完成，但用户确有单张图片补充需求时，可用作补充提示；不能计入视频、文档或其他对象文章的主方法。
 
+### related_supplement
+
+当单张图片处理是同一创作/发布流程的独立后续决策时，可作为 Related Supplement；须通过 `16` 的五项相邻性判定并明确它不处理主任务对象。
+
 ### excluded
 
 - 视频、音频、GIF、PDF、网页或文本任务；
@@ -34,7 +38,7 @@
 1. 读 `01-product-knowledge-base_v1.md`。
 2. 读 `02-product-usage-whitepaper_v1.md`。
 3. 对价格、Credits、免费预览、批处理、最大分辨率、平台和隐私做当次官网复核。
-4. 将角色和事实状态记录进 Brief 后再写作。
+4. 将 `formal_method`、`ultra_tip`、`related_supplement` 或 `scoped_exclusion` 及事实状态记录进 Brief 后再写作。
 
 ## 4. 当前资料
 

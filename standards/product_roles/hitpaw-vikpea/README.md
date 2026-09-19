@@ -27,6 +27,10 @@
 
 当文章核心不是视频增强／修复，但读者在完成主任务后可能需要处理自有视频时，可作为补充工具；不计入正式方法数量。
 
+### related_supplement
+
+当自有视频处理是同一工作流中的独立后续决策、需要比短 Tip 更完整的边界说明时，可作为 Related Supplement；须通过 `16` 的五项相邻性判定，且不改变主文章的方法数或结论。
+
 ### excluded
 
 以下情况禁止植入：
@@ -41,7 +45,7 @@
 1. 读 `01-product-knowledge-base_v1.md` 确认能力、限制和事实状态。
 2. 读 `02-product-usage-whitepaper_v1.md` 决定产品位置、操作说明和必披露边界。
 3. 对价格、试用、版本、云端额度、系统要求和功能可用性做当次官网复核。
-4. 在 Brief 记录 `formal_method`、`ultra_tip` 或 `excluded`，再写正文。
+4. 在 Brief 记录 `formal_method`、`ultra_tip`、`related_supplement` 或 `scoped_exclusion`，再写正文。
 
 ## 4. 当前资料
 

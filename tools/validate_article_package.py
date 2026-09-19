@@ -17,12 +17,17 @@ REQUIRED_FILES=[
  'qa-render.json','workflow-state.json','release-manifest.json','editorial-qa.json']
 ARTICLE_TYPES={'how_to','top_evaluation','vs','general_topic','alternatives','what_is_specs'}
 PRODUCT_ROLES={
- 'how_to':{'formal_method','ultra_tip','excluded'},
- 'top_evaluation':{'ranked_candidate','excluded'},
- 'vs':{'comparison_subject','excluded'},
- 'general_topic':{'implementation_tool','ultra_tip','excluded'},
- 'alternatives':{'ranked_candidate','excluded'},
- 'what_is_specs':{'implementation_tool','ultra_tip','excluded'}}
+ 'how_to':{'formal_method','ultra_tip','related_supplement','excluded'},
+ 'top_evaluation':{'ranked_candidate','related_supplement','excluded'},
+ 'vs':{'comparison_subject','related_supplement','excluded'},
+ 'general_topic':{'implementation_tool','ultra_tip','related_supplement','excluded'},
+ 'alternatives':{'ranked_candidate','related_supplement','excluded'},
+ 'what_is_specs':{'implementation_tool','ultra_tip','related_supplement','excluded'}}
+ADJACENT_ROLES={'ultra_tip','related_supplement'}
+ADJACENCY_FIELDS=(
+    'reader_follow_on_need','relationship_to_primary_task','verified_supported_object',
+    'evidence_path','primary_task_boundary','placement','module_heading',
+    'non_substitution_disclosure')
 
 def narrative_count(markdown,source_heading='Sources'):
     lines=[];in_sources=False
@@ -119,8 +124,13 @@ def validate(package):
         product=cfg.get('product',{})
         if product.get('recommended') not in {'none',None,''}:
             if product.get('role') not in PRODUCT_ROLES.get(cfg.get('article_type'),set()): errors.append('Product role is not valid for this article type')
-            if product.get('role')=='excluded' and (product.get('resolution')!='user_confirmed' or not product.get('authorization_reference')):
-                errors.append('Recommended product excluded without user confirmation')
+            if product.get('role')=='excluded':
+                mandatory=product.get('mandatory_product_inclusion')
+                if mandatory not in {True,False}: errors.append('Excluded product must declare mandatory_product_inclusion')
+                if mandatory and (product.get('resolution')!='user_confirmed' or not product.get('authorization_reference')):
+                    errors.append('Mandatory recommended product excluded without user confirmation')
+                if not mandatory and product.get('resolution') not in {'scoped_exclusion','user_confirmed'}:
+                    errors.append('Excluded product needs scoped_exclusion or user_confirmed resolution')
             if product.get('role')=='excluded':
                 realtime=product.get('real_time_official_verification',{})
                 for field in ['checked_at','product_page','official_guide','object_or_format_evidence','catalog_conflict_resolution']:
@@ -132,6 +142,26 @@ def validate(package):
                 if not str(product.get('official_source','')).startswith('https://') or not product.get('verified_date'):
                     errors.append('Recommended product needs current official evidence')
                 if product.get('official_source') not in data['links']: errors.append('Official product evidence is missing from final Word links')
+            if product.get('role') in ADJACENT_ROLES:
+                assessment=product.get('adjacency_assessment',{})
+                if assessment.get('result')!='adjacent_fit': errors.append('Adjacent product role needs adjacent_fit assessment')
+                for field in ADJACENCY_FIELDS:
+                    if not isinstance(assessment.get(field),str) or not assessment[field].strip():
+                        errors.append('Adjacent product role lacks assessment field: '+field)
+                if product.get('role')=='ultra_tip' and assessment.get('placement') not in {'post_main_methods','after_core_answer'}:
+                    errors.append('Ultra Tip requires post-main placement')
+                if product.get('role')=='related_supplement' and assessment.get('placement') not in {'after_core_answer','post_main_methods','related_resources'}:
+                    errors.append('Related Supplement requires post-core placement')
+                module=assessment.get('module_heading','').strip()
+                md_h2=markdown_h2s(markdown)
+                word_h2=[text.strip().casefold() for level,text in data['headings'] if level==2]
+                if module and (module.casefold() not in md_h2 or module.casefold() not in word_h2):
+                    errors.append('Adjacent product module heading is absent from final Markdown or Word')
+                disclosure=assessment.get('non_substitution_disclosure','').strip()
+                if disclosure and (disclosure not in markdown or disclosure not in data['text']):
+                    errors.append('Adjacent product non-substitution disclosure is absent from final article')
+                if module and 'quick answer' in md_h2 and md_h2.index(module.casefold()) <= md_h2.index('quick answer'):
+                    errors.append('Adjacent product module must appear after Quick Answer')
         elif product.get('recommended')!='none': errors.append('Explicitly record recommended product or none')
         keyword_map=(package/'05_文章结构与关键词映射.md').read_text()
         if primary and primary.casefold() not in keyword_map.casefold(): errors.append('Primary keyword missing from keyword map')

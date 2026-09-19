@@ -1,14 +1,15 @@
 {
   "schema_version": 1,
   "workflow_id": "article-generation",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "bootstrap_files": [
     "AGENTS.md",
     "EXECUTION.md",
     "brief.md",
     "standards/README.md",
     "standards/00-交付契约与发布级验收_v1.md",
-    "standards/08-多类型文章调度与共享标准_v1.md"
+    "standards/08-多类型文章调度与共享标准_v1.md",
+    "standards/16-产品相邻性与阻断分流_v1.md"
   ],
   "stages": [
     {
